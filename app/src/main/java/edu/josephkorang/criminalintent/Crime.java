@@ -1,3 +1,5 @@
+package edu.josephkorang.criminalintent;
+
 import java.util.UUID;
 public class Crime {
     private UUID mId;
