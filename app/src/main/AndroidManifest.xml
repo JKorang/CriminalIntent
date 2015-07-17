@@ -14,11 +14,13 @@
         </intent-filter>
         </activity>
 
-        <activity android:name=".CrimeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".CrimeActivity" >
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CrimeListActivity"/>
+        </activity>
+        <activity android:name=".CrimePagerActivity" >
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CrimeListActivity"/>
         </activity>
 
     </application>
