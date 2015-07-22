@@ -54,6 +54,8 @@ public class DatePickerFragment extends DialogFragment {
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
+        final int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+        final int minute = calendar.get(Calendar.MINUTE);
 
         View v = getActivity().getLayoutInflater()
                 .inflate(R.layout.dialog_date, null);
@@ -61,7 +63,7 @@ public class DatePickerFragment extends DialogFragment {
         DatePicker datePicker = (DatePicker)v.findViewById(R.id.dialog_date_datePicker);
         datePicker.init(year, month, day, new OnDateChangedListener() {
             public void onDateChanged(DatePicker view, int year, int month, int day) {
-                mDate = new GregorianCalendar(year, month, day).getTime();
+                mDate = new GregorianCalendar(year, month, day, hourOfDay, minute).getTime();
 
                 // update argument to preserve selected value on rotation
                 getArguments().putSerializable(EXTRA_DATE, mDate);

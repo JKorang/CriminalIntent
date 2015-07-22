@@ -21,8 +21,10 @@ public class TimePickerFragment extends DialogFragment {
             "edu.josephkorang.criminalintent.TIME";
 
     private Date mTime;
+    private static Date mPriorDate;
 
     public static TimePickerFragment newInstance(Date date) {
+        mPriorDate = date;
         Bundle args = new Bundle();
         args.putSerializable(EXTRA_TIME, date);
 
@@ -51,6 +53,9 @@ public class TimePickerFragment extends DialogFragment {
         calendar.setTime(mTime);
         int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         View v = getActivity().getLayoutInflater()
                 .inflate(R.layout.dialog_time, null);
@@ -62,7 +67,7 @@ public class TimePickerFragment extends DialogFragment {
         timePicker.setOnTimeChangedListener(new OnTimeChangedListener() {
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
                 // Translate year / month / date into a Date object, using a calendar
-                mTime = new GregorianCalendar(0, 0, 0, hourOfDay, minute).getTime();
+                mTime = new GregorianCalendar(year, month, day, hourOfDay, minute).getTime();
 
                 getArguments().putSerializable(EXTRA_TIME, mTime);
             }
