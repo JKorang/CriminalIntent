@@ -5,7 +5,10 @@ package edu.josephkorang.criminalintent;
  */
 
         import java.io.BufferedReader;
+        import java.io.File;
+        import java.io.FileInputStream;
         import java.io.FileNotFoundException;
+        import java.io.FileOutputStream;
         import java.io.InputStream;
         import java.io.InputStreamReader;
         import java.io.IOException;
@@ -25,10 +28,12 @@ public class CriminalIntentJSONSerializer {
 
     private Context mContext;
     private String mFilename;
+    private File mFile;
 
     public CriminalIntentJSONSerializer(Context c, String f) {
         mContext = c;
         mFilename = f;
+        mFile = new File(mFilename);
     }
 
     public ArrayList<Crime> loadCrimes() throws IOException, JSONException {
@@ -36,7 +41,7 @@ public class CriminalIntentJSONSerializer {
         BufferedReader reader = null;
         try {
             // open and read the file into a StringBuilder
-            InputStream in = mContext.openFileInput(mFilename);
+            FileInputStream in = new FileInputStream(mFile);
             reader = new BufferedReader(new InputStreamReader(in));
             StringBuilder jsonString = new StringBuilder();
             String line = null;
@@ -69,7 +74,7 @@ public class CriminalIntentJSONSerializer {
         // write the file to disk
         Writer writer = null;
         try {
-            OutputStream out = mContext.openFileOutput(mFilename, Context.MODE_PRIVATE);
+            FileOutputStream out = new FileOutputStream(mFile);
             writer = new OutputStreamWriter(out);
             writer.write(array.toString());
         } finally {
