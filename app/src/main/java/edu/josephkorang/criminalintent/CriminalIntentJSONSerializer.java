@@ -52,6 +52,7 @@ public class CriminalIntentJSONSerializer {
             }
         } catch (FileNotFoundException e) {
             // we will ignore this one, since it happens when we start fresh
+            System.out.println("Err Load");
         } finally {
             if (reader != null)
                 reader.close();
