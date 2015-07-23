@@ -18,5 +18,6 @@
     <string name="date">Date?</string>
     <string name="time">Time?</string>
     <string name="choose_date_time">Edit date or time?</string>
+  <string name="take">Take!</string>
 
 </resources>
