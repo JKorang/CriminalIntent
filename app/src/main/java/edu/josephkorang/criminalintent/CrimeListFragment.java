@@ -33,8 +33,8 @@ public class CrimeListFragment extends ListFragment {
      */
     public interface Callbacks {
         void onCrimeSelected(Crime crime);
-
     }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -45,6 +45,8 @@ public class CrimeListFragment extends ListFragment {
         super.onDetach();
         mCallbacks = null;
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -123,10 +125,6 @@ public class CrimeListFragment extends ListFragment {
         // get the Crime from the adapter
         Crime c = ((CrimeAdapter)getListAdapter()).getItem(position);
         mCallbacks.onCrimeSelected(c);
-        // start an instance of CrimePagerActivity
-        Intent i = new Intent(getActivity(), CrimePagerActivity.class);
-        i.putExtra(CrimeFragment.EXTRA_CRIME_ID, c.getId());
-        startActivityForResult(i, 0);
     }
 
     @Override
@@ -153,9 +151,6 @@ public class CrimeListFragment extends ListFragment {
                 CrimeLab.get(getActivity()).addCrime(crime);
                 ((CrimeAdapter)getListAdapter()).notifyDataSetChanged();
                 mCallbacks.onCrimeSelected(crime);
-                Intent i = new Intent(getActivity(), CrimeActivity.class);
-                i.putExtra(CrimeFragment.EXTRA_CRIME_ID, crime.getId());
-                startActivityForResult(i, 0);
                 return true;
             case R.id.menu_item_show_subtitle:
                 if (getActivity().getActionBar().getSubtitle() == null) {

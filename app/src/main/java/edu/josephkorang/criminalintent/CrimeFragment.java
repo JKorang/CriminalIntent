@@ -44,14 +44,22 @@ public class CrimeFragment extends Fragment {
     private static final int REQUEST_TIME = 1;
     private static final int REQUEST_PHOTO = 2;
     private static final int REQUEST_CONTACT = 3;
-    private CrimeListFragment.Callbacks mCallbacks;
+    private Callbacks mCallbacks;
 
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mCallbacks = (CrimeListFragment.Callbacks) activity;
+        mCallbacks = (Callbacks) activity;
     }
+
+    /**
+     * Required interface for hosting activities
+     */
+    public interface Callbacks {
+        void onCrimeUpdated(Crime crime);
+    }
+
 
     @Override
     public void onDetach() {
@@ -331,7 +339,9 @@ public class CrimeFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(getActivity());
+                if (NavUtils.getParentActivityName(getActivity()) != null) {
+                    NavUtils.navigateUpFromSameTask(getActivity());
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

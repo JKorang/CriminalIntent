@@ -8,7 +8,9 @@ import android.support.v4.app.FragmentTransaction;
 /**
  * Created by root on 7/6/15.
  */
-public class CrimeListActivity extends SingleFragmentActivity  implements CrimeListFragment.Callbacks  {
+public class CrimeListActivity extends SingleFragmentActivity
+        implements CrimeListFragment.Callbacks, CrimeFragment.Callbacks {
+
     @Override
     protected Fragment createFragment() {
         return new CrimeListFragment();
@@ -19,7 +21,6 @@ public class CrimeListActivity extends SingleFragmentActivity  implements CrimeL
         return R.layout.activity_masterdetail;
     }
 
-    @Override
     public void onCrimeSelected(Crime crime) {
         if (findViewById(R.id.detailFragmentContainer) == null) {
             // Start an instance of CrimePagerActivity
@@ -29,18 +30,23 @@ public class CrimeListActivity extends SingleFragmentActivity  implements CrimeL
         } else {
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
+
             Fragment oldDetail = fm.findFragmentById(R.id.detailFragmentContainer);
             Fragment newDetail = CrimeFragment.newInstance(crime.getId());
+
             if (oldDetail != null) {
                 ft.remove(oldDetail);
             }
+
             ft.add(R.id.detailFragmentContainer, newDetail);
             ft.commit();
         }
     }
 
-    @Override
-    public void onCrimeUpdated(Crime mCrime) {
-
+    public void onCrimeUpdated(Crime crime) {
+        FragmentManager fm = getSupportFragmentManager();
+        CrimeListFragment listFragment = (CrimeListFragment)
+                fm.findFragmentById(R.id.fragmentContainer);
+        listFragment.updateUI();
     }
 }
