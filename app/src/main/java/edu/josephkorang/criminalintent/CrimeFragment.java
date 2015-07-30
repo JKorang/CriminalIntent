@@ -15,7 +15,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -285,7 +284,6 @@ public class CrimeFragment extends Fragment {
             if (filename != null) {
                 Photo p = new Photo(filename);
                 mCrime.setPhoto(p);
-                Log.i(TAG, "Crime: " + mCrime.getTitle() + " has a photo");
                 mCallbacks.onCrimeUpdated(mCrime);
                 showPhoto();
             }

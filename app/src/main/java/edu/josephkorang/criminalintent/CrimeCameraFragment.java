@@ -9,7 +9,6 @@ import android.hardware.Camera.Size;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -50,14 +49,12 @@ public class CrimeCameraFragment extends Fragment {
                 os = getActivity().openFileOutput(filename, Context.MODE_PRIVATE);
                 os.write(data);
             } catch (Exception e) {
-                Log.e(TAG, "Error writing to file " + filename, e);
                 success = false;
             } finally {
                 try {
                     if (os != null)
                         os.close();
                 } catch (Exception e) {
-                    Log.e(TAG, "Error closing file " + filename, e);
                     success = false;
                 }
             }
@@ -102,7 +99,6 @@ public class CrimeCameraFragment extends Fragment {
                         mCamera.setPreviewDisplay(holder);
                     }
                 } catch (IOException exception) {
-                    Log.e(TAG, "Error setting up preview display", exception);
                 }
             }
 
@@ -125,7 +121,6 @@ public class CrimeCameraFragment extends Fragment {
                 try {
                     mCamera.startPreview();
                 } catch (Exception e) {
-                    Log.e(TAG, "Could not start preview", e);
                     mCamera.release();
                     mCamera = null;
                 }

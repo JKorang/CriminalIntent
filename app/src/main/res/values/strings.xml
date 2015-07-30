@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">CriminalIntent</string>
+    <string name="app_name">Criminal Intent</string>
     <string name="crime_title_hint">Enter a title for this crime.</string>
     <string name="crime_title_label">Title</string>
     <string name="crime_details_label">Details</string>
@@ -31,6 +31,15 @@
     <string name="crime_report_suspect">The suspect is %s.</string>
     <string name="crime_report_subject">CriminalIntent Crime Report</string>
     <string name="send_report">Send crime report via</string>
+
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
+    <string name="eula">End User License Agreement\n\n
+
+        By accepting this EULA, the user understands that the coder is not liable for any false claims, mistaken identities, or accidentally shaken martinis.\n\n
+
+        By declining this EULA, you realize that you should probably just hire an actual private eye.
+    </string>
 
 
 </resources>
