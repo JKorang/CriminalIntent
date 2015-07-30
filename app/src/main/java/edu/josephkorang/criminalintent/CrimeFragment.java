@@ -1,10 +1,5 @@
 package edu.josephkorang.criminalintent;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.UUID;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -32,7 +27,11 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TimePicker;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
 
 public class CrimeFragment extends Fragment {
     public static final String EXTRA_CRIME_ID = "edu.josephkorang.criminalintent.CRIME_ID";
@@ -44,38 +43,15 @@ public class CrimeFragment extends Fragment {
     private static final int REQUEST_TIME = 1;
     private static final int REQUEST_PHOTO = 2;
     private static final int REQUEST_CONTACT = 3;
-    private Callbacks mCallbacks;
-
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mCallbacks = (Callbacks) activity;
-    }
-
-    /**
-     * Required interface for hosting activities
-     */
-    public interface Callbacks {
-        void onCrimeUpdated(Crime crime);
-    }
-
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mCallbacks = null;
-    }
-
     Crime mCrime;
     EditText mTitleField;
     Button mDateButton;
     Button mTimeButton;
     CheckBox mSolvedCheckBox;
+    private Callbacks mCallbacks;
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
     private Button mSuspectButton;
-
 
     public static CrimeFragment newInstance(UUID crimeId) {
         Bundle args = new Bundle();
@@ -85,6 +61,18 @@ public class CrimeFragment extends Fragment {
         fragment.setArguments(args);
 
         return fragment;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mCallbacks = (Callbacks) activity;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCallbacks = null;
     }
 
     private String getCrimeReport() {
@@ -346,6 +334,13 @@ public class CrimeFragment extends Fragment {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * Required interface for hosting activities
+     */
+    public interface Callbacks {
+        void onCrimeUpdated(Crime crime);
     }
 
 

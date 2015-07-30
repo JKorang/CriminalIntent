@@ -1,7 +1,5 @@
 package edu.josephkorang.criminalintent;
 
-import java.util.ArrayList;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -24,29 +22,24 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class CrimeListFragment extends ListFragment {
     private ArrayList<Crime> mCrimes;
     private boolean mSubtitleVisible;
     private Callbacks mCallbacks;
-    /**
-     * Required interface for hosting activities.
-     */
-    public interface Callbacks {
-        void onCrimeSelected(Crime crime);
-    }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mCallbacks = (Callbacks)activity;
+        mCallbacks = (Callbacks) activity;
     }
+
     @Override
     public void onDetach() {
         super.onDetach();
         mCallbacks = null;
     }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,7 +64,7 @@ public class CrimeListFragment extends ListFragment {
             }
         }
 
-        ListView listView = (ListView)v.findViewById(android.R.id.list);
+        ListView listView = (ListView) v.findViewById(android.R.id.list);
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             registerForContextMenu(listView);
@@ -92,7 +85,7 @@ public class CrimeListFragment extends ListFragment {
                 public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.menu_item_delete_crime:
-                            CrimeAdapter adapter = (CrimeAdapter)getListAdapter();
+                            CrimeAdapter adapter = (CrimeAdapter) getListAdapter();
                             CrimeLab crimeLab = CrimeLab.get(getActivity());
                             for (int i = adapter.getCount() - 1; i >= 0; i--) {
                                 if (getListView().isItemChecked(i)) {
@@ -123,13 +116,13 @@ public class CrimeListFragment extends ListFragment {
 
     public void onListItemClick(ListView l, View v, int position, long id) {
         // get the Crime from the adapter
-        Crime c = ((CrimeAdapter)getListAdapter()).getItem(position);
+        Crime c = ((CrimeAdapter) getListAdapter()).getItem(position);
         mCallbacks.onCrimeSelected(c);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        ((CrimeAdapter)getListAdapter()).notifyDataSetChanged();
+        ((CrimeAdapter) getListAdapter()).notifyDataSetChanged();
     }
 
     @Override
@@ -149,7 +142,7 @@ public class CrimeListFragment extends ListFragment {
             case R.id.menu_item_new_crime:
                 Crime crime = new Crime();
                 CrimeLab.get(getActivity()).addCrime(crime);
-                ((CrimeAdapter)getListAdapter()).notifyDataSetChanged();
+                ((CrimeAdapter) getListAdapter()).notifyDataSetChanged();
                 mCallbacks.onCrimeSelected(crime);
                 return true;
             case R.id.menu_item_show_subtitle:
@@ -157,7 +150,7 @@ public class CrimeListFragment extends ListFragment {
                     getActivity().getActionBar().setSubtitle(R.string.subtitle);
                     mSubtitleVisible = true;
                     item.setTitle(R.string.hide_subtitle);
-                }  else {
+                } else {
                     getActivity().getActionBar().setSubtitle(null);
                     mSubtitleVisible = false;
                     item.setTitle(R.string.show_subtitle);
@@ -175,9 +168,9 @@ public class CrimeListFragment extends ListFragment {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        AdapterContextMenuInfo info = (AdapterContextMenuInfo)item.getMenuInfo();
+        AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
         int position = info.position;
-        CrimeAdapter adapter = (CrimeAdapter)getListAdapter();
+        CrimeAdapter adapter = (CrimeAdapter) getListAdapter();
         Crime crime = adapter.getItem(position);
 
         switch (item.getItemId()) {
@@ -187,6 +180,17 @@ public class CrimeListFragment extends ListFragment {
                 return true;
         }
         return super.onContextItemSelected(item);
+    }
+
+    public void updateUI() {
+        ((CrimeAdapter) getListAdapter()).notifyDataSetChanged();
+    }
+
+    /**
+     * Required interface for hosting activities.
+     */
+    public interface Callbacks {
+        void onCrimeSelected(Crime crime);
     }
 
     private class CrimeAdapter extends ArrayAdapter<Crime> {
@@ -206,21 +210,17 @@ public class CrimeListFragment extends ListFragment {
             Crime c = getItem(position);
 
             TextView titleTextView =
-                    (TextView)convertView.findViewById(R.id.crime_list_item_titleTextView);
+                    (TextView) convertView.findViewById(R.id.crime_list_item_titleTextView);
             titleTextView.setText(c.getTitle());
             TextView dateTextView =
-                    (TextView)convertView.findViewById(R.id.crime_list_item_dateTextView);
+                    (TextView) convertView.findViewById(R.id.crime_list_item_dateTextView);
             dateTextView.setText(c.getDate().toString());
             CheckBox solvedCheckBox =
-                    (CheckBox)convertView.findViewById(R.id.crime_list_item_solvedCheckBox);
+                    (CheckBox) convertView.findViewById(R.id.crime_list_item_solvedCheckBox);
             solvedCheckBox.setChecked(c.isSolved());
 
             return convertView;
         }
-    }
-
-    public void updateUI() {
-        ((CrimeAdapter)getListAdapter()).notifyDataSetChanged();
     }
 }
 

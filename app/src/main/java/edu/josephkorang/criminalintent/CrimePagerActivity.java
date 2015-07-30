@@ -1,24 +1,20 @@
 package edu.josephkorang.criminalintent;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
-
-/**
- * Created by root on 7/16/15.
- */
-
-import java.util.ArrayList;
-import java.util.UUID;
-
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 
-public class CrimePagerActivity extends FragmentActivity  implements CrimeFragment.Callbacks {
+import java.util.ArrayList;
+import java.util.UUID;
+
+/**
+ * Created by root on 7/16/15.
+ */
+
+public class CrimePagerActivity extends FragmentActivity implements CrimeFragment.Callbacks {
     ViewPager mViewPager;
 
     public void onCrimeUpdated(Crime crime) {
@@ -40,14 +36,15 @@ public class CrimePagerActivity extends FragmentActivity  implements CrimeFragme
             public int getCount() {
                 return crimes.size();
             }
+
             @Override
             public Fragment getItem(int pos) {
-                UUID crimeId =  crimes.get(pos).getId();
+                UUID crimeId = crimes.get(pos).getId();
                 return CrimeFragment.newInstance(crimeId);
             }
         });
 
-        UUID crimeId = (UUID)getIntent().getSerializableExtra(CrimeFragment.EXTRA_CRIME_ID);
+        UUID crimeId = (UUID) getIntent().getSerializableExtra(CrimeFragment.EXTRA_CRIME_ID);
         for (int i = 0; i < crimes.size(); i++) {
             if (crimes.get(i).getId().equals(crimeId)) {
                 mViewPager.setCurrentItem(i);

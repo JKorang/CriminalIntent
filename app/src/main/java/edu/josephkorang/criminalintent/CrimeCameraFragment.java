@@ -26,9 +26,9 @@ import java.util.UUID;
  * Created by jkorang on 7/22/15.
  */
 public class CrimeCameraFragment extends Fragment {
-    private static final String TAG = "CrimeCameraFragment";
     public static final String EXTRA_PHOTO_FILENAME =
             "edu.josephkorang.criminalintent.photo_filename";
+    private static final String TAG = "CrimeCameraFragment";
     private Camera mCamera;
     private SurfaceView mSurfaceView;
     private View mProgressContainer;
@@ -80,7 +80,7 @@ public class CrimeCameraFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_crime_camera, parent, false);
         mProgressContainer = v.findViewById(R.id.crime_camera_progressContainer);
         mProgressContainer.setVisibility(View.INVISIBLE);
-        Button takePictureButton = (Button)v
+        Button takePictureButton = (Button) v
                 .findViewById(R.id.crime_camera_takePictureButton);
         takePictureButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -89,7 +89,7 @@ public class CrimeCameraFragment extends Fragment {
                 }
             }
         });
-        mSurfaceView = (SurfaceView)v.findViewById(R.id.crime_camera_surfaceView);
+        mSurfaceView = (SurfaceView) v.findViewById(R.id.crime_camera_surfaceView);
         SurfaceHolder holder = mSurfaceView.getHolder();
         // setType() and SURFACE_TYPE_PUSH_BUFFERS are both deprecated,
         // but are required for Camera preview to work on pre-3.0 devices.
@@ -136,9 +136,11 @@ public class CrimeCameraFragment extends Fragment {
         return v;
     }
 
-    /** A simple algorithm to get the largest size available. For a more
+    /**
+     * A simple algorithm to get the largest size available. For a more
      * robust version, see CameraPreview.java in the ApiDemos
-     * sample app from Android. */
+     * sample app from Android.
+     */
     private Size getBestSupportedSize(List<Size> sizes, int width, int height) {
         Size bestSize = sizes.get(0);
         int largestArea = bestSize.width * bestSize.height;

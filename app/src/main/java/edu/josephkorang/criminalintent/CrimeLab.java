@@ -1,23 +1,18 @@
 package edu.josephkorang.criminalintent;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.UUID;
-
 import android.content.Context;
-
 import android.os.Environment;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 public class CrimeLab {
     private static final String TAG = "CrimeLab";
     private static final String FILENAME = Environment.getExternalStorageDirectory() + "/crimes.json";
-
-
+    private static CrimeLab sCrimeLab;
     private ArrayList<Crime> mCrimes;
     private CriminalIntentJSONSerializer mSerializer;
-
-    private static CrimeLab sCrimeLab;
     private Context mAppContext;
 
     private CrimeLab(Context appContext) {

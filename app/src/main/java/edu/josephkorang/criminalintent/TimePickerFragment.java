@@ -2,8 +2,7 @@ package edu.josephkorang.criminalintent;
 /**
  * Created by root on 7/17/15.
  */
-import java.util.Calendar;
-import java.util.Date;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -13,15 +12,17 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.TimePicker;
-import java.util.GregorianCalendar;
 import android.widget.TimePicker.OnTimeChangedListener;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class TimePickerFragment extends DialogFragment {
     public static final String EXTRA_TIME =
             "edu.josephkorang.criminalintent.TIME";
-
-    private Date mTime;
     private static Date mPriorDate;
+    private Date mTime;
 
     public static TimePickerFragment newInstance(Date date) {
         mPriorDate = date;
