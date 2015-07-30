@@ -185,7 +185,6 @@ public class CrimeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), CrimeCameraActivity.class);
-                startActivity(i);
                 startActivityForResult(i, REQUEST_PHOTO);
             }
         });
